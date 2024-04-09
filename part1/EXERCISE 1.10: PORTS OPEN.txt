@@ -1,0 +1,3 @@
+// "web-server" is an image is used to run the devopsdockeruh/simple-web-service without any argument
+
+$ docker run -p 8080:8080 web-server
