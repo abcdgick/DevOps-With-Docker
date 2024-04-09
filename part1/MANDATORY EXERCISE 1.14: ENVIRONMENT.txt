@@ -1,0 +1,42 @@
+$ docker run -p 5000:5000 frontend-docker
+
+INFO  Accepting connections at http://localhost:5000
+ HTTP  4/9/2024 1:56:51 PM 192.168.65.1 GET /
+ HTTP  4/9/2024 1:56:51 PM 192.168.65.1 Returned 200 in 60 ms
+ HTTP  4/9/2024 1:56:51 PM 192.168.65.1 GET /static/css/main.eaa5d75e.chunk.css
+ HTTP  4/9/2024 1:56:51 PM 192.168.65.1 GET /static/css/main.eaa5d75e.chunk.css.map
+ HTTP  4/9/2024 1:56:51 PM 192.168.65.1 GET /static/js/2.43ca3586.chunk.js
+ HTTP  4/9/2024 1:56:51 PM 192.168.65.1 GET /static/js/main.667b6e84.chunk.js
+ HTTP  4/9/2024 1:56:51 PM 192.168.65.1 Returned 200 in 26 ms
+ HTTP  4/9/2024 1:56:51 PM 192.168.65.1 Returned 200 in 16 ms
+ HTTP  4/9/2024 1:56:51 PM 192.168.65.1 Returned 200 in 18 ms
+ HTTP  4/9/2024 1:56:51 PM 192.168.65.1 Returned 200 in 32 ms
+ HTTP  4/9/2024 1:56:51 PM 192.168.65.1 GET /static/css/main.eaa5d75e.chunk.css.map
+ HTTP  4/9/2024 1:56:51 PM 192.168.65.1 Returned 200 in 2 ms
+ HTTP  4/9/2024 1:56:51 PM 192.168.65.1 GET /static/js/2.43ca3586.chunk.js.map
+ HTTP  4/9/2024 1:56:51 PM 192.168.65.1 Returned 200 in 25 ms
+ HTTP  4/9/2024 1:56:51 PM 192.168.65.1 GET /static/media/toskalogo.c0f35cf0.svg
+ HTTP  4/9/2024 1:56:51 PM 192.168.65.1 Returned 200 in 6 ms
+ HTTP  4/9/2024 1:56:52 PM 192.168.65.1 GET /static/js/main.667b6e84.chunk.js.map
+ HTTP  4/9/2024 1:56:52 PM 192.168.65.1 Returned 200 in 11 ms
+ HTTP  4/9/2024 1:56:52 PM 192.168.65.1 GET /favicon.ico
+ HTTP  4/9/2024 1:56:52 PM 192.168.65.1 GET /manifest.json
+ HTTP  4/9/2024 1:56:52 PM 192.168.65.1 Returned 200 in 20 ms
+ HTTP  4/9/2024 1:56:52 PM 192.168.65.1 Returned 200 in 13 ms
+
+
+$ docker run -p 8080:8080 backend-docker
+
+[Ex 2.4+] REDIS_HOST env was not passed so redis connection is not initialized
+[Ex 2.6+] POSTGRES_HOST env was not passed so postgres connection is not initialized
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /ping                     --> server/router.pingpong (4 handlers)
+[GIN-debug] GET    /messages                 --> server/controller.GetMessages (4 handlers)
+[GIN-debug] POST   /messages                 --> server/controller.CreateMessage (4 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2024/04/09 - 13:56:53 | 200 |    6.050698ms |    192.168.65.1 | GET      "/ping"
