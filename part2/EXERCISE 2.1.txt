@@ -1,0 +1,10 @@
+$ touch text.log
+$ cat docker-compose.yml 
+version: '3.8'
+
+services: 
+
+  web-service:
+    image: devopsdockeruh/simple-web-service
+    volumes:
+      - ./text.log:/usr/src/app/text.log
