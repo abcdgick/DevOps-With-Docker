@@ -1,0 +1,9 @@
+$ cat docker-compose.yml
+
+version: '3.8'
+
+services: 
+
+  web-service:
+    image: devopsdockeruh/simple-web-service
+    command: "server"
