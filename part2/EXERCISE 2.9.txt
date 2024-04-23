@@ -1,0 +1,83 @@
+NOTE: There's an issue with the CORS Origin, so both url on frontend and backend Dockerfile are changed to use the nginx routing
+
+$ cat example-frontend/Dockerfile 
+
+FROM node:16-alpine
+
+EXPOSE 5000
+
+WORKDIR usr/src/app
+
+COPY . .
+
+ENV REACT_APP_BACKEND_URL=http://localhost/api/
+
+RUN npm install
+RUN npm run build 
+RUN npm install -g serve
+
+CMD ["serve", "-s", "-l", "5000", "build"]
+
+
+
+$ cat example-backend/Dockerfile
+
+FROM golang:1.16-alpine
+
+EXPOSE 8080
+
+WORKDIR usr/src/app
+
+COPY . .
+
+ENV REQUEST_ORIGIN=http://localhost/
+
+RUN go mod download && go build
+
+CMD ["./server"]
+
+
+
+$ cat docker-compose.yml 
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - '80:80'
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+
+  frontend:
+    build: ./example-frontend
+    ports: 
+      - '5000:5000'
+
+  backend:
+    build: ./example-backend
+    environment:
+      - REDIS_HOST=redis
+      - POSTGRES_HOST=db
+    ports:
+      - '8080:8080'
+
+  redis:
+    image: redis:alpine
+    ports:
+      - '6379:6379'
+    restart: unless-stopped
+
+  db:
+    image: postgres:alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./database:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 9090:8080
